@@ -1,0 +1,13 @@
+<% if @player && @player.size > 0 %>
+  Welcome to Battleships, <%= @player %>!
+<% else %>
+  <%if @player && @player.size == 0%>
+  You did not enter a name.
+  <%end%>
+  <form>
+    What's your name?
+    <input type="text" name="name">
+    <input type="submit" value="submit">
+  </form>
+
+<% end %>

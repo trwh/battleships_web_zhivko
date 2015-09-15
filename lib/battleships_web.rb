@@ -1,10 +1,20 @@
 require 'sinatra/base'
 
-class battle_ship_september < Sinatra::Base
+class Battle_ship_september < Sinatra::Base
+
+set :views, proc { File.join(root, '..', 'views')}
+
   get '/' do
-    'Hello battle_ship_september!'
+    erb :index
   end
+
+  get '/new_game' do
+    @player = params[:name]
+    erb :new_player
+  end
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0
+
 end
