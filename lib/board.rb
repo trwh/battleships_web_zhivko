@@ -10,6 +10,19 @@ class Board
 		end
 	end
 
+	def print_table
+  result = "<table border = '1'>\n"
+  @grid.keys.each_slice(10) do |slice|
+    new_result = "<tr>\n"
+    slice.each do |element|
+      new_result << "<td>#{element}</td>\n"
+    end
+    new_result << "</tr>\n"
+    result << new_result
+  end
+  "#{result} \n</table>"
+end
+
 	def place(ship, coord, orientation = :horizontally)
 		coords = [coord]
 		(ship.size - 1).times{coords << next_coord(coords.last, orientation)}

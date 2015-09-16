@@ -17,6 +17,7 @@ set :views, proc { File.join(root, '..', 'views')}
   get '/start_the_game' do
     @board = Board.new(Cell)
     @grid = @board.grid
+    @result = @board.print_table
     erb :start_the_game
   end
 
