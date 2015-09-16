@@ -16,7 +16,8 @@ set :views, proc { File.join(root, '..', 'views')}
 
   get '/start_the_game' do
     @board = Board.new(Cell)
-    @grid = @board.grid
+    @ship = Ship.new(3)
+    @board.place(@ship, :A3, :vertically)
     @result = @board.print_table
     erb :start_the_game
   end

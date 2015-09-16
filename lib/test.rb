@@ -35,12 +35,20 @@ def print_table(cell_names)
   cell_names.keys.each_slice(3) do |slice|
     new_result = "<tr>\n"
     slice.each do |element|
-      new_result << "<td>#{element}</td>\n"
+      visualisation = ''
+      if cell_names[element].content == water
+        visualisation = 'O'
+      else
+        visualisation = 'X'
+      end
+      new_result << "<td>#{visualisation}</td>\n"
     end
     new_result << "</tr>\n"
     result << new_result
   end
   result
 end
+
+
 
 p print_table(cell_names)

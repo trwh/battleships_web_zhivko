@@ -1,4 +1,5 @@
 require_relative 'cell'
+require_relative 'ship'
 
 class Board
 	attr_reader :grid
@@ -15,7 +16,13 @@ class Board
   @grid.keys.each_slice(10) do |slice|
     new_result = "<tr>\n"
     slice.each do |element|
-      new_result << "<td>#{element}</td>\n"
+    	vis = ''
+    	if grid[element].content.is_a? Water
+    		vis = 'O'
+    	else
+    		vis = 'S'
+    	end
+      new_result << "<td>#{vis}</td>\n"
     end
     new_result << "</tr>\n"
     result << new_result
