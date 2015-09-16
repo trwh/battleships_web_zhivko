@@ -16,11 +16,12 @@ class Board
   @grid.keys.each_slice(10) do |slice|
     new_result = "<tr>\n"
     slice.each do |element|
-    	vis = ''
-    	if grid[element].content.is_a? Water
-    		vis = 'O'
-    	else
-    		vis = 'S'
+			if grid[element].hit?
+				vis = 'X'
+			elsif grid[element].content.is_a? Ship
+				vis = 'S'
+			else
+				vis = 'O'
     	end
       new_result << "<td>#{vis}</td>\n"
     end
@@ -86,4 +87,3 @@ private
 	end
 
 end
-

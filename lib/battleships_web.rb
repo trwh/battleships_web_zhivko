@@ -1,9 +1,15 @@
 require 'sinatra/base'
 require_relative 'board'
 
+$board = Board.new(Cell)
+ship = Ship.new(3)
+$board.place(ship, :C3, :vertically)
+
 class Battle_ship_september < Sinatra::Base
 
-set :views, proc { File.join(root, '..', 'views')}
+  #enable :sessions
+
+  set :views, proc { File.join(root, '..', 'views')}
 
   get '/' do
     erb :index
@@ -11,16 +17,27 @@ set :views, proc { File.join(root, '..', 'views')}
 
   get '/new_game' do
     @player = params[:name]
+    # @ship = Ship.new(3)
+    # $board.place(@ship, :A3, :vertically)
     erb :new_player
   end
 
   get '/start_the_game' do
-    @board = Board.new(Cell)
-    @ship = Ship.new(3)
-    @board.place(@ship, :A3, :vertically)
-    @result = @board.print_table
-    erb :start_the_game
+    # @board = Board.new(Cell
+    if params[:coordinate].nil?
+      erb :start_the_game
+    else
+      p params
+      @coord = params[:coordinate].to_sym
+      $board.shoot_at(@coord)
+      erb :start_the_game
+    end
   end
+
+    get '/start_the_game/shooting' do
+
+      p $board.print_table
+    end
 
 
   # start the server if ruby file executed directly
