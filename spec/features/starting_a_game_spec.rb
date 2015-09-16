@@ -16,10 +16,19 @@ feature 'Starting a new game' do
   end
 
   scenario 'after I did not enter my name' do
-  visit '/'
-  click_link 'New Game'
-  click_button('submit')
-  expect(page).to have_content "You did not enter a name. What's your name?"
+    visit '/'
+    click_link 'New Game'
+    click_button('submit')
+    expect(page).to have_content "You did not enter a name. What's your name?"
   end
+
+  scenario '' do
+    visit '/new_game'
+    fill_in('name', :with => 'John')
+    click_button('submit')
+    click_link('Start the game')
+    expect(page).to have_content "Board"
+  end
+
 
 end

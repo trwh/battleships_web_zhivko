@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require_relative 'board'
 
 class Battle_ship_september < Sinatra::Base
 
@@ -11,6 +12,12 @@ set :views, proc { File.join(root, '..', 'views')}
   get '/new_game' do
     @player = params[:name]
     erb :new_player
+  end
+
+  get '/start_the_game' do
+    @board = Board.new(Cell)
+    @grid = @board.grid
+    erb :start_the_game
   end
 
 

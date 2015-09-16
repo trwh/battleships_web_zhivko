@@ -1,6 +1,9 @@
+require_relative 'water'
+
 class Cell
 	attr_accessor :content
-	def initialize
+	def initialize (content = Water)
+		@content = content.new
 		@hit = false
 	end
 
