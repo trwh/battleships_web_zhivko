@@ -2,6 +2,8 @@ require 'spec_helper'
 
 feature 'Starting a new game' do
 
+  before { $board = Board.new(Cell) }
+
   scenario 'I am asked to enter my name' do
     visit '/'
     click_link 'New Game'
@@ -34,8 +36,12 @@ end
 
 feature 'Playing the game' do
 
-  scenario 'placing a ship on the board' do
+  before do
+    $board = Board.new(Cell)
     visit '/new_game'
+  end
+
+  scenario 'placing a ship on the board' do
     visit '/start_the_game'
     fill_in('coordinate', :with => 'A1')
     click_button('Place')
@@ -60,6 +66,8 @@ feature 'Playing the game' do
 
   scenario 'can place two ships with different sizes' do
     visit '/start_the_game'
+    fill_in('coordinate', :with => 'A1')
+    click_button('Place')
     fill_in('coordinate', :with => 'B1' )
     click_button('Place')
     expect(page.text).to match (/S B5/)
