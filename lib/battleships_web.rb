@@ -5,7 +5,7 @@ $board = Board.new(Cell)
 
 class Battle_ship_september < Sinatra::Base
 
-  #enable :sessions
+  enable :sessions
 
   set :views, proc { File.join(root, '..', 'views')}
 
@@ -14,9 +14,9 @@ class Battle_ship_september < Sinatra::Base
   end
 
   get '/new_game' do
-    @player = params[:name]
-    @ship = Ship.new(3)
-    $board.place(@ship, :A3, :vertically)
+    # @player = params[:name]
+    # @ship = Ship.new(3)
+    # $board.place(@ship, :A3, :vertically)
     erb :new_player
   end
 
@@ -25,18 +25,11 @@ class Battle_ship_september < Sinatra::Base
     if params[:coordinate].nil?
       erb :start_the_game
     else
-      p params
       @coord = params[:coordinate].to_sym
       $board.shoot_at(@coord)
       erb :start_the_game
     end
   end
-
-    get '/start_the_game/shooting' do
-
-      p $board.print_table
-    end
-
 
   # start the server if ruby file executed directly
   run! if app_file == $0
