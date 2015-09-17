@@ -38,7 +38,14 @@ feature 'Playing the game' do
     visit '/start_the_game'
     fill_in('coordinate', :with => 'A1')
     click_button('Place')
-    expect(page.text).to match (/S A2/)
+    expect(page.text).to match (/S A4/)
   end
 
+  scenario 'cannot place ship over one another' do
+    visit '/start_the_game'
+    fill_in('coordinate', :with => 'A1')
+    click_button('Place')
+    fill_in('coordinate', :with => 'A3' )
+    expect(page).to have_content "You cannot place a ship there!"
+  end
 end

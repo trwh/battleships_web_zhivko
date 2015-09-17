@@ -15,18 +15,17 @@ class Battle_ship_september < Sinatra::Base
 
   get '/new_game' do
     @player = params[:name]
-    # @ship = Ship.new(3)
-    # $board.place(@ship, :A3, :vertically)
     erb :new_player
   end
 
   get '/start_the_game' do
-    # @board = Board.new(Cell
+    session[:size] = 3
     if params[:coordinate].nil?
       erb :start_the_game
     else
-      @coord = params[:coordinate].to_sym
-      $board.shoot_at(@coord)
+      coord = params[:coordinate].to_sym
+      ship = Ship.new(session[:size])
+      $board.place(ship, coord, :horizontally)
       erb :start_the_game
     end
   end
