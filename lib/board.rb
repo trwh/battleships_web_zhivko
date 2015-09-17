@@ -12,9 +12,9 @@ class Board
 	end
 
 	def print_table
-  result = "<table style=\"width:375px; margin-left: 30px; font-family: Tahoma, Geneva, sans-serif\">\n"
+  result = "<table border=\"1\">\n"
   @grid.keys.each_slice(10) do |slice|
-    new_result = "<tr style=\"width:375px; margin-left: 30px; font-family: Tahoma, Geneva, sans-serif\">\n"
+    new_result = "<tr>\n"
     slice.each do |element|
 			if grid[element].hit?
 				vis = 'X'

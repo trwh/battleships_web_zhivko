@@ -14,7 +14,7 @@ class Battle_ship_september < Sinatra::Base
   end
 
   get '/new_game' do
-    # @player = params[:name]
+    @player = params[:name]
     # @ship = Ship.new(3)
     # $board.place(@ship, :A3, :vertically)
     erb :new_player

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 feature 'Starting a new game' do
+
   scenario 'I am asked to enter my name' do
     visit '/'
     click_link 'New Game'
@@ -22,13 +23,23 @@ feature 'Starting a new game' do
     expect(page).to have_content "You did not enter a name. What's your name?"
   end
 
-  scenario '' do
+  scenario 'to have content board' do
     visit '/new_game'
     fill_in('name', :with => 'John')
     click_button('submit')
     click_link('Start the game')
     expect(page).to have_content "Board"
   end
+end
 
+feature 'Playing the game' do
+
+  scenario 'placing a ship on the board' do
+    visit '/start_the_game'
+    fill_in('coord', :with => 'A1')
+    click_button('Place')
+    click_link('Start the game')
+    expect(page.text).to match (/ 1 [mx]/)
+  end
 
 end
