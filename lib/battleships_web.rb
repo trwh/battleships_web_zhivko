@@ -19,13 +19,18 @@ class Battle_ship_september < Sinatra::Base
   end
 
   get '/start_the_game' do
+    @failed = false
     session[:size] = 3
     if params[:coordinate].nil?
       erb :start_the_game
     else
       coord = params[:coordinate].to_sym
       ship = Ship.new(session[:size])
-      $board.place(ship, coord, :horizontally)
+      begin
+        $board.place(ship, coord, :horizontally)
+      rescue
+        @failed = true
+      end
       erb :start_the_game
     end
   end

@@ -1,6 +1,9 @@
 <div>
 Board
 </div>
+<% if @failed %>
+  <blink>You cannot place a ship there!</blink><br>
+<% end %>
  <div>
   <%=$board.print_table %>
 </div>
