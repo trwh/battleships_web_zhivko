@@ -36,10 +36,9 @@ feature 'Playing the game' do
 
   scenario 'placing a ship on the board' do
     visit '/start_the_game'
-    fill_in('coord', :with => 'A1')
+    fill_in('coordinate', :with => 'A1')
     click_button('Place')
-    click_link('Start the game')
-    expect(page.text).to match (/ 1 [mx]/)
+    expect(page.text).to match (/S A2/)
   end
 
 end

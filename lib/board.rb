@@ -21,7 +21,7 @@ class Board
 			elsif grid[element].content.is_a? Ship
 				vis = 'S'
 			else
-				vis = 'O'
+				vis = element
     	end
       new_result << "<td>#{vis}</td>\n"
     end
