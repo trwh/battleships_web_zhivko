@@ -35,6 +35,7 @@ end
 feature 'Playing the game' do
 
   scenario 'placing a ship on the board' do
+    visit '/new_game'
     visit '/start_the_game'
     fill_in('coordinate', :with => 'A1')
     click_button('Place')
@@ -46,6 +47,22 @@ feature 'Playing the game' do
     fill_in('coordinate', :with => 'A1')
     click_button('Place')
     fill_in('coordinate', :with => 'A3' )
+    click_button('Place')
     expect(page).to have_content "You cannot place a ship there!"
   end
+
+  scenario 'cannot place ship off the board' do
+    visit '/start_the_game'
+    fill_in('coordinate', :with => 'A11')
+    click_button('Place')
+    expect(page).to have_content "You cannot place a ship there!"
+  end
+
+  scenario 'can place two ships with different sizes' do
+    visit '/start_the_game'
+    fill_in('coordinate', :with => 'B1' )
+    click_button('Place')
+    expect(page.text).to match (/S B5/)
+  end
+
 end

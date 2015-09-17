@@ -14,13 +14,14 @@ class Battle_ship_september < Sinatra::Base
   end
 
   get '/new_game' do
+    session[:size] = 3
     @player = params[:name]
     erb :new_player
   end
 
   get '/start_the_game' do
     @failed = false
-    session[:size] = 3
+
     if params[:coordinate].nil?
       erb :start_the_game
     else
@@ -30,9 +31,12 @@ class Battle_ship_september < Sinatra::Base
         $board.place(ship, coord, :horizontally)
       rescue
         @failed = true
+      else
+        session[:size] += 1
       end
       erb :start_the_game
     end
+
   end
 
   # start the server if ruby file executed directly
